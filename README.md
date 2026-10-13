@@ -16,7 +16,23 @@ It is designed to help data analysts and governance teams understand **what went
 - **Governance reporting** — generates a structured governance report with findings, evidence, governance rules, and remediation guidance.
 - **Streamlit interface** — provides an interactive interface for uploading datasets, reviewing findings, asking Atlas questions, and generating reports.
 - **Automated testing** — includes unit, integration, privacy, retrieval, agent, pipeline, and live LLM tests.
+## 📸 Demo
 
+### Atlas Dashboard
+
+![Atlas Dashboard](images/01-atlas-home.png)
+
+### Dataset Overview & Privacy-Safe Preview
+
+![Dataset Overview](images/02-dataset-overview.png)
+
+### Automated Governance Findings
+
+![Atlas Findings](images/03-findings.png)
+
+### Grounded AI Investigation
+
+![Ask Atlas](images/04-ask-atlas.png)
 ## 🏗️ Architecture
 
 ```text

@@ -1,5 +1,6 @@
 import pandas as pd
 
+from app.governance.anomalies import detect_numeric_anomalies
 from app.governance.pii import detect_pii_columns
 from app.governance.quality import (
     detect_duplicates,
@@ -26,6 +27,7 @@ def analyze_dataset(df: pd.DataFrame) -> dict:
     duplicate_findings = detect_duplicates(df)
     invalid_findings = detect_invalid_values(df)
     pii_findings = detect_pii_columns(df)
+    anomaly_findings = detect_numeric_anomalies(df)
 
     all_findings: list[AtlasFinding] = []
 
@@ -81,10 +83,24 @@ def analyze_dataset(df: pd.DataFrame) -> dict:
             )
         )
 
+    # Normalize behavioral anomaly findings
+    for finding in anomaly_findings:
+        all_findings.append(
+            AtlasFinding(
+                category="behavioral_anomaly",
+                column=finding.column,
+                issue=finding.issue,
+                count=finding.count,
+                severity=finding.severity,
+                description=finding.description,
+            )
+        )
+
     return {
         "quality_findings": quality_findings,
         "duplicate_findings": duplicate_findings,
         "invalid_findings": invalid_findings,
         "pii_findings": pii_findings,
+        "anomaly_findings": anomaly_findings,
         "all_findings": all_findings,
     }

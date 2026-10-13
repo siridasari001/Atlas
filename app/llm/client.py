@@ -9,23 +9,11 @@ class LLMClient:
     """
 
     def __init__(self):
-        """
-        Initialize the OpenAI client.
-        """
-
-        self.client = OpenAI()
+        self.client = OpenAI(
+            api_key=settings.openai_api_key
+        )
 
     def generate(self, prompt: str) -> str:
-        """
-        Generate a response from the language model.
-
-        Args:
-            prompt: Prompt containing the context and user request.
-
-        Returns:
-            The generated response as text.
-        """
-
         response = self.client.responses.create(
             model="gpt-5-mini",
             input=prompt,

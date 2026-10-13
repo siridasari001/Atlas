@@ -48,7 +48,14 @@ def test_full_atlas_pipeline(run_live_llm):
 
     findings = analysis["all_findings"]
 
-    assert len(findings) == 8
+    assert len(findings) == 9
+
+    assert any(
+        finding.issue == "behavioral_anomaly"
+        and finding.column == "annual_spend"
+        and finding.count == 1
+        for finding in findings
+    )
 
     resolver = FindingResolver()
 

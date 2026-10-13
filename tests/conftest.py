@@ -1,4 +1,13 @@
+import sys
+from pathlib import Path
+
 import pytest
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 
 def pytest_addoption(parser):
@@ -12,7 +21,6 @@ def pytest_addoption(parser):
 
 @pytest.fixture
 def run_live_llm(request):
-
     return request.config.getoption(
         "--run-live-llm"
     )

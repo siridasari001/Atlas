@@ -59,3 +59,20 @@ downstream AI systems or displayed in user-facing interfaces.
 
 Access to unredacted PII should follow the organization's approved
 access-control and data-governance policies.
+
+---
+
+## Rule 5: Behavioral Anomalies
+
+When Atlas identifies a behavioral anomaly:
+
+1. Review the anomalous value in the context of the dataset.
+2. Verify the value against the appropriate upstream source system
+   when necessary.
+3. Confirm with the data owner whether the unusual value represents
+   a legitimate business event or an actual data-quality issue.
+4. Do not automatically delete, replace, cap, normalize, or transform
+   an anomalous value solely because it was statistically identified
+   as unusual.
+5. If the value is confirmed to be invalid, correct it using the
+   organization's approved source-system or data-quality workflow.

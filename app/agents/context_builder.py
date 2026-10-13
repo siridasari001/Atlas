@@ -55,28 +55,50 @@ class GovernanceContextBuilder:
         elif atlas_finding.category == "data_integrity":
             governance_category = "data_integrity"
 
+        elif atlas_finding.category == "behavioral_anomaly":
+            governance_category = "governance"
+
         elif atlas_finding.issue == "pii_detected":
             governance_category = "pii"
 
         # --------------------------------------------------
-        # 4. Retrieve applicable governance knowledge
+        # 4. Build targeted governance retrieval query
+        # --------------------------------------------------
+
+        if atlas_finding.issue == "behavioral_anomaly":
+            governance_query = (
+                "Behavioral anomalies, statistically unusual values, "
+                "anomaly investigation signals, and whether an anomaly "
+                "automatically means a value is incorrect"
+            )
+        else:
+            governance_query = query
+
+        # --------------------------------------------------
+        # 5. Retrieve applicable governance knowledge
         # --------------------------------------------------
 
         governance_knowledge = self.retriever.search(
-            query=query,
+            query=governance_query,
             top_k=top_k,
             category=governance_category,
         )
 
         # --------------------------------------------------
-        # 5. Retrieve remediation knowledge
+        # 6. Retrieve remediation knowledge
         # --------------------------------------------------
 
-        remediation_query = (
-            f"What approved remediation guidance applies to "
-            f"the {atlas_finding.issue} issue in the "
-            f"{atlas_finding.column} column?"
-        )
+        if atlas_finding.issue == "behavioral_anomaly":
+            remediation_query = (
+                "What approved remediation guidance applies to "
+                "a behavioral anomaly or statistically unusual value?"
+            )
+        else:
+            remediation_query = (
+                f"What approved remediation guidance applies to "
+                f"the {atlas_finding.issue} issue in the "
+                f"{atlas_finding.column} column?"
+            )
 
         remediation_knowledge = self.retriever.search(
             query=remediation_query,
@@ -85,7 +107,7 @@ class GovernanceContextBuilder:
         )
 
         # --------------------------------------------------
-        # 6. Combine knowledge for the reasoning layer
+        # 7. Combine knowledge for the reasoning layer
         # --------------------------------------------------
 
         retrieved_knowledge = (

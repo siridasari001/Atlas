@@ -75,6 +75,34 @@ def collect_finding_evidence(
         matching_rows = df[df[column] < 0]
 
     # --------------------------------------------------
+    # Behavioral anomalies
+    # --------------------------------------------------
+
+    elif finding.issue == "behavioral_anomaly":
+        series = df[column].dropna()
+
+        # Avoid unreliable statistics on very small samples.
+        if len(series) < 5:
+            return []
+
+        q1 = series.quantile(0.25)
+        q3 = series.quantile(0.75)
+        iqr = q3 - q1
+
+        if iqr == 0:
+            return []
+
+        lower_bound = q1 - (1.5 * iqr)
+        upper_bound = q3 + (1.5 * iqr)
+
+        anomaly_mask = (
+            (df[column] < lower_bound)
+            | (df[column] > upper_bound)
+        )
+
+        matching_rows = df[anomaly_mask]
+
+    # --------------------------------------------------
     # PII findings
     # --------------------------------------------------
 

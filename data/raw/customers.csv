@@ -1,0 +1,14 @@
+customer_id,customer_name,email,phone,date_of_birth,country,account_type,annual_spend
+1001,Ava Johnson,ava.johnson@email.com,2145550101,1998-04-12,USA,Premium,12500.50
+1002,Liam Smith,liam.smith@email.com,2145550102,1995-08-21,USA,Standard,4200.00
+1003,Olivia Brown,,2145550103,2001-11-03,USA,Standard,3100.75
+1004,Noah Davis,noah.davis@email.com,,1992-06-18,Canada,Premium,18900.00
+1005,Emma Wilson,emma.wilson@email.com,2145550105,,USA,Basic,850.25
+1006,James Miller,james.miller@email.com,2145550106,1988-02-14,USA,Premium,22100.40
+1007,Sophia Moore,sophia.moore@email.com,2145550107,1999-07-30,USA,Standard,-500.00
+1008,William Taylor,william.taylor@email.com,2145550108,1990-10-09,USA,Premium,15750.00
+1009,Isabella Anderson,isabella.anderson@email.com,2145550109,2002-01-25,USA,Basic,1200.00
+1010,Benjamin Thomas,benjamin.thomas@email.com,2145550110,1985-05-17,USA,Standard,5600.50
+1010,Benjamin Thomas,benjamin.thomas@email.com,2145550110,1985-05-17,USA,Standard,5600.50
+1011,Mia Jackson,mia.jackson@email.com,2145550112,1997-09-11,USA,Premium,13200.00
+1012,Lucas White,lucas.white@email.com,2145550113,1993-12-02,USA,Standard,4700.25
